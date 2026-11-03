@@ -10,7 +10,11 @@ const productSchema = new Schema({
         size: String,
         color: String,
         stock: {type: Number, default: 0, min: 0}
-    }]
+    }],
+    isDeleted: {
+        type: Boolean,
+        default: false
+    }
 }, {
     timestamps: true
 });
