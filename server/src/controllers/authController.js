@@ -5,13 +5,13 @@ const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, role } = req.body;
         const existingUser = await User.findOne({ email })
         if (existingUser) {
             res.status(401).json("Email da ton tai");
             return;
         }
-        const user = new User({ name, email, password });
+        const user = new User({ name, email, password, role });
         await user.save();
         res.status(201).json("dang ky thanh cong");
     } catch (err) {
@@ -44,7 +44,7 @@ const login = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                role: user.role
+                role: user
             }
         });
     } catch (err) {
