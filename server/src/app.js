@@ -7,8 +7,8 @@ const authRoutes = require('./routes/authRoutes');
 app.use(express.json());
 
 app.use('/api', router);
-app.use('/api/san-pham', productRoutes);
+app.use('/api/product', productRoutes);
 
-app.use('/api/dang-ky', authRoutes);
+app.use('/api/auth', authRoutes);
 
 module.exports = app;
