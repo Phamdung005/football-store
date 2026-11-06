@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Header() {
     return (
         <>
@@ -13,9 +15,23 @@ function Header() {
                         <li><a href="/phu-kien">Phụ kiện</a></li>
                     </ul>
                     <ul className="flex items-center justify-between gap-4 text-white">
-                        <li><a href="/dang-nhap">Đăng nhập</a></li>
+                        <li>
+                            <Link
+                                to="/dang-nhap"
+                                className="text-white hover:text-red-500"
+                            >
+                                Đăng nhập
+                            </Link>
+                        </li>
                         |
-                        <li><a href="/dang-ky">Đăng ký</a></li>
+                        <li>
+                            <Link
+                                to="/dang-ky"
+                                className="text-white hover:text-red-500"
+                            >
+                                Đăng ký
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
             </header>
