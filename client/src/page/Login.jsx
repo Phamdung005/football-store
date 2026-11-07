@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,12 +19,18 @@ function Login() {
             })
         });
         const data = await response.json();
-        if(response.ok === false) {
+        if (response.ok === false) {
             alert(data.message);
             return;
         }
-        alert("Đăng nhập thành công");
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        if (data.user.role === "admin") {
+            navigate("/admin");
+        } else {
+            navigate("/");
+        }
+        alert("Đăng nhập thành công");
     }
 
     return (
