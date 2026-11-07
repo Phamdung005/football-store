@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/authContext';
 
 function Header() {
+    const { user } = useAuth();
     return (
         <>
             <header className="bg-gray-800 p-4">
@@ -14,25 +16,49 @@ function Header() {
                         <li><a href="/giay-bong-da">Giày bóng đá</a></li>
                         <li><a href="/phu-kien">Phụ kiện</a></li>
                     </ul>
-                    <ul className="flex items-center justify-between gap-4 text-white">
-                        <li>
-                            <Link
-                                to="/dang-nhap"
-                                className="text-white hover:text-red-500"
-                            >
-                                Đăng nhập
-                            </Link>
-                        </li>
-                        |
-                        <li>
-                            <Link
-                                to="/dang-ky"
-                                className="text-white hover:text-red-500"
-                            >
-                                Đăng ký
-                            </Link>
-                        </li>
-                    </ul>
+                    {user ? (
+                        user.role === "admin" ? (
+                            <div>
+                                <span>{"Xin chào admin" + user.name}</span>
+                                <Link
+                                    to="/"
+                                    className="text-white hover:text-red-500"
+                                >
+                                    Đăng xuất
+                                </Link>
+                            </div>
+                        ) : (
+                            <div>
+                                <span>{user.name}</span>
+                                <Link
+                                    to="/"
+                                    className="text-white hover:text-red-500"
+                                >
+                                    Đăng xuất
+                                </Link>
+                            </div>
+                        )
+                    ) : (
+                        <ul className="flex items-center justify-between gap-4 text-white">
+                            <li>
+                                <Link
+                                    to="/dang-nhap"
+                                    className="text-white hover:text-red-500"
+                                >
+                                    Đăng nhập
+                                </Link>
+                            </li>
+                            |
+                            <li>
+                                <Link
+                                    to="/dang-ky"
+                                    className="text-white hover:text-red-500"
+                                >
+                                    Đăng ký
+                                </Link>
+                            </li>
+                        </ul>
+                    )}
                 </nav>
             </header>
         </>
