@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
     return (
         <>
             <header className="bg-gray-800 p-4">
@@ -17,27 +19,18 @@ function Header() {
                         <li><a href="/phu-kien">Phụ kiện</a></li>
                     </ul>
                     {user ? (
-                        user.role === "admin" ? (
-                            <div>
-                                <span>{"Xin chào admin" + user.name}</span>
-                                <Link
-                                    to="/"
-                                    className="text-white hover:text-red-500"
-                                >
-                                    Đăng xuất
-                                </Link>
-                            </div>
-                        ) : (
-                            <div>
-                                <span>{user.name}</span>
-                                <Link
-                                    to="/"
-                                    className="text-white hover:text-red-500"
-                                >
-                                    Đăng xuất
-                                </Link>
-                            </div>
-                        )
+                        <div>
+                            <span>{user.name}</span>
+                            <button
+                                className="text-white hover:text-red-500 cursor-pointer"
+                                onClick={() => {
+                                    logout();
+                                    navigate("/");
+                                }}
+                            >
+                                Đăng xuất
+                            </button>
+                        </div>
                     ) : (
                         <ul className="flex items-center justify-between gap-4 text-white">
                             <li>

@@ -7,8 +7,14 @@ function AuthProvider({ children }) {
         const storeUser = localStorage.getItem("user");
         return storeUser ? JSON.parse(storeUser) : null;
     });
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setUser(null);
+    }
     return (
-        <AuthContext.Provider value={{ user, setUser }}>
+        <AuthContext.Provider value={{ user, setUser, logout }}>
             {children}
         </AuthContext.Provider>
     )

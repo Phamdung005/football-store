@@ -3,14 +3,18 @@ import { Navigate } from 'react-router-dom';
 function ProtectedRoute({ children, allowedRoles }) {
     const token = localStorage.getItem("token");
     if (!token) {
-        return <Navigate to="/dang-nhap" replace />
+        return <Navigate to="/" replace />
     }
     const user = JSON.parse(localStorage.getItem("user"));
-    if (!token || !user) {
-        return <Navigate to="/dang-nhap" replace />
+    if (!user) {
+        return <Navigate to="/" replace />
     }
     if (!allowedRoles.includes(user.role)) {
-        return <Navigate to="/" replace />;
+        if (user.role === "admin") {
+            return <Navigate to="/admin" replace />
+        } else {
+            return <Navigate to="/" replace />;
+        }
     } else {
         return children;
     }
