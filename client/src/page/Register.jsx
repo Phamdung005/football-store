@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -24,6 +25,7 @@ function Login() {
 
     return (
         <>
+            <Header />
             <div className="min-h-screen flex items-center justify-center">
                 <div className="w-full max-w-md p-8 border rounded-xl">
                     <h1 className="flex items-center justify-center p-10 font-bold">ĐĂNG KÝ</h1>
