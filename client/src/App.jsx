@@ -4,6 +4,9 @@ import HomeRedirect from './components/HomeRedirect';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import Admin from './page/Admin';
+import Dashboard from './page/Outlet/Dashboard';
+import ProductMn from './page/Outlet/ProductMn';
+import UserMn from './page/Outlet/UserMn';
 
 function App() {
 
@@ -19,7 +22,11 @@ function App() {
           <ProtectedRoute allowedRoles={['admin']}>
             <Admin />
           </ProtectedRoute>
-        } />
+        } >
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="productmn" element={<ProductMn />} />
+          <Route path="usermn" element={<UserMn />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
